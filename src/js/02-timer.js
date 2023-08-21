@@ -12,7 +12,7 @@
         minutesCounter:document.querySelector('span[data-minutes]'),
         secondsCounter:document.querySelector('span[data-seconds]'),
     }
-
+ refs.startBtn.disabled = true;
     const currentTime = new Date();
 
 
@@ -25,10 +25,13 @@
         onClose(selectedDates) {
             if (selectedDates[0].getTime() - currentTime.getTime() < 0) {
                 Notiflix.Report.warning("Please choose a date in the future")
-                refs.startBtn.disabled = true;
+                // refs.startBtn.disabled = true;
+                // refs.inputText.disabled = true;
                 clearInterval(countdownInterval);
             } else {
                 refs.startBtn.disabled = false;
+                refs.inputText.disabled = false;
+                
         }
         // console.log(selectedDates[0]);
     },
@@ -40,6 +43,8 @@
     refs.startBtn.addEventListener('click', () => {
         const selectedDate = refs.dateTimePicker._flatpickr.selectedDates[0];
         let countdownMs = selectedDate.getTime() - currentTime.getTime();
+        refs.startBtn.disabled = true;
+        refs.inputText.disabled = true;
         function updateTimer() {
             countdownMs -= 1000;
         if (countdownMs < 0) {
@@ -47,8 +52,9 @@
         refs.daysCounter.textContent = "00";
         refs.hoursCounter.textContent = "00";
         refs.minutesCounter.textContent = "00";
-        refs.secondsCounter.textContent = "00";
-        refs.startBtn.disabled = true;
+            refs.secondsCounter.textContent = "00";
+        // refs.startBtn.disabled = false;
+        refs.inputText.disabled = false;
         }
             const { days, hours, minutes, seconds } = convertMs(countdownMs);
             refs.daysCounter.textContent = addLeadingZero(days);

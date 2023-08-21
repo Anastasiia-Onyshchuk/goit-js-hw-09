@@ -34,5 +34,15 @@ img {
 button{
   border-radius: 0;
   font-family: inherit;
-  
+  height: 30px;
+padding: 0.3125rem;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+}
+.form{
+  display: flex;
+  align-items:flex-end;
 }

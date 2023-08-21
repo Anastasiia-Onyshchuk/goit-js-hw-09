@@ -26,7 +26,7 @@ refs.form.addEventListener('submit', (evt) => {
       .catch(({ position, delay }) => {
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
         count++;
-        if (count <= amount) {
+        if (count <= refs.amount) {
           handlePromise(createPromise(count, delay + (count - 1) * step));
         }
       });
