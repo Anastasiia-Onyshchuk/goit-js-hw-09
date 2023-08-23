@@ -8,7 +8,7 @@ const refs = {
 
 refs.form.addEventListener('submit', (evt) => {
   evt.preventDefault()
-  const delayValue = parseInt(refs.delay.value);
+  let delayValue = parseInt(refs.delay.value);
   const stepValue = parseInt(refs.step.value);
   const amountValue = parseInt(refs.amount.value);
   const promises = [];
@@ -19,7 +19,7 @@ refs.form.addEventListener('submit', (evt) => {
       .then(({ position, delay }) => {
        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
         count++;
-        console.log(typeof (Notiflix.Notify));
+        console.log(typeof Notiflix.Notify);
         if (count <= amountValue) {
           handlePromise(createPromise(count, delay + (count - 1) * stepValue));
         }
@@ -42,7 +42,7 @@ function createPromise(position, delay) {
       if (shouldResolve) {
         resolve({ position, delay })
       } else {
-        reject([{ position, delay }])
+        reject({ position, delay })
       }
     }, delay);
   });
