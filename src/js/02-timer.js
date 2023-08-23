@@ -47,14 +47,14 @@
         refs.inputText.disabled = true;
         function updateTimer() {
             countdownMs -= 1000;
-        if (countdownMs < 0) {
-        clearInterval(countdownInterval);
-        refs.daysCounter.textContent = "00";
-        refs.hoursCounter.textContent = "00";
-        refs.minutesCounter.textContent = "00";
-            refs.secondsCounter.textContent = "00";
-        // refs.startBtn.disabled = false;
-        refs.inputText.disabled = false;
+            if (countdownMs <= 0) {
+                clearInterval(countdownInterval);
+                refs.daysCounter.textContent = "00";
+                refs.hoursCounter.textContent = "00";
+                refs.minutesCounter.textContent = "00";
+                refs.secondsCounter.textContent = "00";
+                refs.inputText.disabled = false;
+                return;
         }
             const { days, hours, minutes, seconds } = convertMs(countdownMs);
             refs.daysCounter.textContent = addLeadingZero(days);
@@ -66,10 +66,6 @@
         updateTimer();
         countdownInterval = setInterval(updateTimer, 1000);
     });
-    // function onStartBtnClick{
-
-    // }
-    // let selectedDates = [dateTimePicker.value];
     function convertMs(ms) {
     // Number of milliseconds per unit of time
     const second = 1000;

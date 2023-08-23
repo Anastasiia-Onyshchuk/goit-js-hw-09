@@ -17,21 +17,22 @@ refs.form.addEventListener('submit', (evt) => {
   function handlePromise(promise) {
     promise
       .then(({ position, delay }) => {
-        Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
+       Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
         count++;
-        if (count <= amount) {
-          handlePromise(createPromise(count, delay + (count - 1) * step));
+        console.log(typeof (Notiflix.Notify));
+        if (count <= amountValue) {
+          handlePromise(createPromise(count, delay + (count - 1) * stepValue));
         }
       })
       .catch(({ position, delay }) => {
         Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
         count++;
-        if (count <= refs.amount) {
-          handlePromise(createPromise(count, delay + (count - 1) * step));
+        if (count <= amountValue) {
+          handlePromise(createPromise(count, delay + (count - 1) * stepValue));
         }
       });
   }
-  handlePromise(createPromise(count, refs.delay));
+  handlePromise(createPromise(count, delayValue));
 })
 function createPromise(position, delay) {
 
